@@ -43,7 +43,7 @@ def roll_it(team):
     teams_rolls = []
     while i < team:
         roll = random.choice(dice)
-        teams_rolls.append(roll)
+        teams_rolls.append(int(roll))
         i = i + 1  # I prefer to be explicit with my iterators 
     return teams_rolls
 
@@ -53,8 +53,23 @@ def get_input():
     invaders = input('\033[92mHow many invaders (1,2, or 3)?:\033[0m ')
     defenders = input('\033[92mHow many defenders (1,2, or 3)?:\033[0m ')
     if args.verbose:
-        print(f"\n\033[94mOk, The following is set:\033[0m\n\n\033[93minvaders:\033[0m{invaders}\n\033[92mdefenders:\033[0m{defenders}\n")
+        print(f"\n\033[94mOk, The following is set:\033[0m\n\n\033[93minvaders: \033[0m{invaders}\n\033[92mdefenders: \033[0m{defenders}\n")
     return int(invaders), int(defenders)
+
+
+def evaluate_rolls(invaders, defenders):
+    invaders.sort(reverse=True)
+    defenders.sort(reverse=True)
+    invaderwins = [item1 for item1, item2 in zip(invaders, defenders) if item1 > item2]
+    defenderwins = [item1 for item1, item2 in zip(defenders, invaders) if item1 > item2]
+    defenderties = [item1 for item1, item2 in zip(defenders, invaders) if item1 == item2]
+    total_invader_wins = len(invaderwins)
+    total_defender_wins = len(defenderwins) + len(defenderties)
+    if args.verbose:
+        print(f'invader win list: {invaderwins}')
+        print(f'defender win list: {defenderwins}')
+        print(f'defender tie list: {defenderties}')
+    return total_invader_wins, total_defender_wins
 
 
 def main():
@@ -73,7 +88,10 @@ def main():
     # roll dice for each and store in list
     invaders_rolls = roll_it(invaders)
     defenders_rolls = roll_it(defenders)
-
+    if args.verbose:
+        print(f'Invader rolls: {invaders_rolls}\nDefender rolls: {defenders_rolls}')
+    invader_wins, defender_wins = evaluate_rolls(invaders_rolls, defenders_rolls)
+    print(f'Invader wins: {invader_wins}\nDefender wins: {defender_wins}\n')
 # main
 
 
