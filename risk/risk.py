@@ -10,30 +10,44 @@ dice = [1, 2, 3, 4, 5, 6]
 forces = [1, 2, 3]
 
 # arguments
-parser = argparse.ArgumentParser(description='game of chance', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser = argparse.ArgumentParser(description='one round of risk', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('-r', '--randommode', help='randommode', action='store_true')
 parser.add_argument('-n', '--no-logo', dest='logo_off', help='disables printing logo', action='store_true', default=False)
-parser.add_argument('-t', '--test', help='prints out james campbell data', action='store_true', default=False)
 parser.add_argument('-v', '--verbose', help='print more stuff', action='store_true')
 parser.add_argument('-i', '--inputmode', action='store_true')
+parser.add_argument('-e', '--evaluatemode', action="store_true")
 args = parser.parse_args()
 
 # functions
 
-
-def random_outcome(invading_forces, defending_forces):
+def evaluations(number_of_rounds):
+    global forces
+    if args.verbose:
+        print('You selected evaluations mode and number of rounds is 1000.\n')
     i = 0
-    while i < invading_forces:
-        roll = random.choice(dice)  # choice always faster than shuffle, had to confirm
-        print(roll)
+    invaders_win = 0
+    defenders_win = 0
+    invaders = random.choice(forces)
+    defenders = random.choice(forces)
+    while i < number_of_rounds:
+        invaders_rolls = roll_it(invaders)
+        defenders_rolls = roll_it(defenders)
+        total_invader_wins, total_defender_wins = evaluate_rolls(invaders_rolls, defenders_rolls)
+        invaders_win = invaders_win + total_invader_wins
+        defenders_win = defenders_win + total_defender_wins
         i = i + 1
-        exit()
+    invaderspercentage = invaders_win/(invaders_win+defenders_win)
+    defenderspercentage = defenders_win/(invaders_win+defenders_win)
+    print(f'Invaders rolls: {invaders}\nDefenders rolls: {defenders}\nRounds: {number_of_rounds}\n')
+    print(f'Invaders wins: {invaders_win} percentage: {invaderspercentage}')
+    print(f'Defenders wins: {defenders_win} percentage: {defenderspercentage}')
+    exit()
 
 
 def check_mode():
     """Check to ensure user selected a mode."""
-    if not args.randommode and not args.inputmode:
-        print('no mode selected, use -i or -r')
+    if not args.randommode and not args.inputmode and not args.evaluatemode:
+        print('no mode selected, use -i or -r or -e')
         exit('goodbye')
 
 
@@ -58,6 +72,7 @@ def get_input():
 
 
 def evaluate_rolls(invaders, defenders):
+    """Evaluate winners and losers from rolls."""
     invaders.sort(reverse=True)
     defenders.sort(reverse=True)
     invaderwins = [item1 for item1, item2 in zip(invaders, defenders) if item1 > item2]
@@ -72,6 +87,18 @@ def evaluate_rolls(invaders, defenders):
     return total_invader_wins, total_defender_wins
 
 
+def play_again():
+    """Check if user wants to play again."""
+    get_input = input('\nPlay again? (y/n): ')
+    if get_input == 'y':
+        from subprocess import call
+        call("clear")
+        # start again
+        main()
+    else:
+        exit('Thanks for playing!')
+
+
 def main():
     """Plays a round of risk for two teams based on criteria."""
     if not args.logo_off:
@@ -81,6 +108,8 @@ def main():
     # based on the mode, get the invaders count and defenders count
     if args.inputmode:
         invaders, defenders = get_input()
+    if args.evaluatemode:
+        evaluations(1000)
     else:
         if args.randommode:
             invaders = random.choice(forces)
@@ -92,6 +121,7 @@ def main():
         print(f'Invader rolls: {invaders_rolls}\nDefender rolls: {defenders_rolls}')
     invader_wins, defender_wins = evaluate_rolls(invaders_rolls, defenders_rolls)
     print(f'Invader wins: {invader_wins}\nDefender wins: {defender_wins}\n')
+    play_again()
 # main
 
 
