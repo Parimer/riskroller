@@ -8,6 +8,7 @@ version = re.search(
     ).group(1)
 
 setup(
+    include_package_data=True,
     name='riskroller',
     author='James Campbell',
     author_email='james@jamescampbell.us',
