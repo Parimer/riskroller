@@ -8,7 +8,7 @@ from map import map
 # globals
 dice = [1, 2, 3, 4, 5, 6]
 forces = [1, 2, 3]
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 # arguments
 parser = argparse.ArgumentParser(description='one round of risk', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
