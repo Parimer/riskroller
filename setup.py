@@ -20,17 +20,13 @@ setup(
     classifiers = ["Programming Language :: Python :: 3 :: Only"],
     install_requires=[
         'argparse',
-        'pandas',
-        'pprint',
-        'requests',
-        'twitter-scraper',
-        'markovify'
+        'setuptools',
     ],
     entry_points={
         'console_scripts': [
             'risk = risk.risk:main',
         ],
         },
-    url = 'https://github.com/jamesacampbell/tayne',
-    download_url = 'https://github.com/jamesacampbell/tayne/archive/{}.tar.gz'.format(version)
+    url = 'https://github.com/Parimer/riskroller',
+    download_url = 'https://github.com/Parimer/riskroller/archive/{}.tar.gz'.format(version)
 )

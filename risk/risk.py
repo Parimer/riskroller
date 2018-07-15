@@ -8,19 +8,22 @@ from map import map
 # globals
 dice = [1, 2, 3, 4, 5, 6]
 forces = [1, 2, 3]
+__version__ = "0.1.0"
 
 # arguments
 parser = argparse.ArgumentParser(description='one round of risk', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('-r', '--randommode', help='randommode', action='store_true')
+parser.add_argument('-r', '--randommode', help='randommode', action='store_true', help='Randomly selects number of rolls for invaders and defenders for round.')
 parser.add_argument('-n', '--no-logo', dest='logo_off', help='disables printing logo', action='store_true', default=False)
 parser.add_argument('-v', '--verbose', help='print more stuff', action='store_true')
-parser.add_argument('-i', '--inputmode', action='store_true')
-parser.add_argument('-e', '--evaluatemode', action="store_true")
+parser.add_argument('-i', '--inputmode', action='store_true', help="Manually input number of rolls available to invader and defender.")
+parser.add_argument('-e', '--evaluatemode', action="store_true", help="Displays probability and selects random pairing of dice rolls for invader and defender.")
 args = parser.parse_args()
 
 # functions
 
+
 def evaluations(number_of_rounds):
+    """Evaluate outcome probability of rolls available."""
     global forces
     if args.verbose:
         print('You selected evaluations mode and number of rounds is 1000.\n')
@@ -122,11 +125,7 @@ def main():
     invader_wins, defender_wins = evaluate_rolls(invaders_rolls, defenders_rolls)
     print(f'Invader wins: {invader_wins}\nDefender wins: {defender_wins}\n')
     play_again()
-# main
 
 
 if __name__ == '__main__':
     main()
-
-
-
