@@ -3,7 +3,7 @@
 # imports
 import random  # Requirement was random num generator, assuming pseudorandom
 import argparse
-from .map import map
+from map import map
 
 # globals
 dice = [1, 2, 3, 4, 5, 6]
