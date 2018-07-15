@@ -3,7 +3,7 @@ import re
 
 version = re.search(
     '^__version__\s*=\s*"(.*)"',
-    open('risk/risk.py').read(),
+    open('riskroller/riskroller.py').read(),
     re.M
     ).group(1)
 
@@ -24,7 +24,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'risk = risk.risk:main',
+            'riskroller = riskroller.riskroller:main',
         ],
         },
     url = 'https://github.com/Parimer/riskroller',

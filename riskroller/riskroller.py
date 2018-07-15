@@ -8,11 +8,11 @@ from map import map
 # globals
 dice = [1, 2, 3, 4, 5, 6]
 forces = [1, 2, 3]
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 # arguments
 parser = argparse.ArgumentParser(description='one round of risk', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('-r', '--randommode', help='randommode', action='store_true', help='Randomly selects number of rolls for invaders and defenders for round.')
+parser.add_argument('-r', '--randommode', action='store_true', help='Randomly selects number of rolls for invaders and defenders for round.')
 parser.add_argument('-n', '--no-logo', dest='logo_off', help='disables printing logo', action='store_true', default=False)
 parser.add_argument('-v', '--verbose', help='print more stuff', action='store_true')
 parser.add_argument('-i', '--inputmode', action='store_true', help="Manually input number of rolls available to invader and defender.")
