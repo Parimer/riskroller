@@ -8,12 +8,11 @@ version = re.search(
     ).group(1)
 
 setup(
-    include_package_data=True,
     name='riskroller',
     author='James Campbell',
     author_email='james@jamescampbell.us',
     version=version,
-    license='GPLv3',
+    license='GPLv3',pip install --force-reinstall0.1.4
     description = 'Play one random or inputed initial conditions of a round of Risk.',
     packages=['riskroller'],
     py_modules=['riskroller'],
