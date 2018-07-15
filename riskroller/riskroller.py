@@ -3,12 +3,37 @@
 # imports
 import random  # Requirement was random num generator, assuming pseudorandom
 import argparse
-from map import map
-
 # globals
+map = '''
+                      +------+
+                      | RISK |
+                      +------+
+               ,_   .  ._. _.  .
+           , _-\','|~\~      ~/      ;-'_   _-'     ,;_;_,    ~~-
+  /~~-\_/-'~'--' \~~| ',    ,'      /  / ~|-_\_/~/~      ~~--~~~~'--_
+  /              ,/'-/~ '\ ,' _  , '|,'|~                   ._/-, /~
+  ~/-'~\_,       '-,| '|. '   ~  ,\ /'~                /    /_  /~
+.-~      '|        '',\~|\       _\~     ,_  ,               /|
+          '\        /'~          |_/~ \,-,~  \ "         ,_,/ |
+           |       /            ._-~'\_ _~|              \ ) /
+            \   __-\           '/      ~ |\  \_          /  ~
+  .,         '\ |,  ~-_      - |           \_' ~|  /\  \~ ,
+               ~-_'  _;       '\           '-,   \,' /\/  |
+                 '\_,~'\_       \_ _,       /'    '  |, /|'
+                   /     \_       ~ |      /         \  ~'; -,_.
+                   |       ~\        |    |  ,        '-_, ,; ~ ~
+                    \,      /        \    / /|            ,-, ,   -,
+                     |    ,/          |  |' |/          ,-   ~ \   '.
+                    ,|   ,/           \ ,/              \       |
+                    /    |             ~                 -~~-, /   _
+                    |  ,-'                                    ~    /
+                    / ,'                                      ~
+                    ',|  ~
+                      ~'
+                      '''
 dice = [1, 2, 3, 4, 5, 6]
 forces = [1, 2, 3]
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 # arguments
 parser = argparse.ArgumentParser(description='one round of risk', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
